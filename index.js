@@ -7,10 +7,13 @@ function isCrashed(chanceOfCrashing) {
     return 1 === Math.floor(Math.random() * Math.floor(chanceOfCrashing));
 }
   
-http.createServer(function (request, response) {
+setInterval(() => {
     if(isCrashed(chance)) {
         crashed = true;
     }
+}, 5000)
+http.createServer(function (request, response) {
+    
     if(crashed) {
         response.writeHead(500, {'Content-Type': 'text/html'});
         response.end('<img src="https://media.giphy.com/media/Urc6CzW703XFajktll/giphy-downsized.gif"> <br> I\m dead \n' + instanceId);
